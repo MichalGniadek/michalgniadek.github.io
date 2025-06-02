@@ -68,7 +68,7 @@ h1 {
   padding: 3em;
   display: grid;
   grid-template-columns: 1fr 0.5fr 1fr;
-  gap: 5em 0em;
+  gap: 10em 0em;
 }
 
 .big {
@@ -84,14 +84,19 @@ h1 {
   aspect-ratio: 1.7;
 }
 
-#shadertoy_embed {
+.shadertoy_embed {
   width: 100%;
   aspect-ratio: 2;
 }
 
-#guninawell_embed {
+.itch_embed {
   width: 100%;
-  aspect-ratio: 1.7;
+  aspect-ratio: 1.777;
+}
+
+.video_embed {
+  width: 100%;
+  aspect-ratio: 1.777;
 }
 
 .showcase_button {
