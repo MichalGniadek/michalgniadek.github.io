@@ -66,8 +66,7 @@ h1 {
 
 .toplevel {
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr 1.5fr;
+  grid-template-columns: 1fr 1.5fr;
 }
 
 .description {
