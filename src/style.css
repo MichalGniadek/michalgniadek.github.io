@@ -131,3 +131,42 @@ h1 {
 .showcase_button:hover > div {
   opacity: 1;
 }
+
+
+/* Pixel editor */
+#grid {
+  display: grid;
+  grid-template-columns: repeat(16, 20px);
+  grid-template-rows: repeat(16, 20px);
+  gap: 0px;
+}
+
+.pixel {
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.075);
+  border: 1px solid #cccccc07;
+  cursor: pointer;
+}
+
+.pixel:hover {
+  outline: 2px solid #999;
+  outline-offset: -2px;
+}
+
+#palette {
+  width: calc(16 * 20px);
+  display: flex;
+  justify-content: space-between;
+}
+
+.color {
+  width: 30px;
+  height: 30px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.color.selected {
+  outline: 2px solid #999;
+}
