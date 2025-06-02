@@ -1,0 +1,15 @@
+{
+  "name": "square-marchinator",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "square_marchinator_bg.wasm",
+    "square_marchinator.js",
+    "square_marchinator.d.ts"
+  ],
+  "main": "square_marchinator.js",
+  "types": "square_marchinator.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
