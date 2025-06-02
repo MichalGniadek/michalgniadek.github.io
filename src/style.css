@@ -132,6 +132,10 @@ h1 {
   opacity: 1;
 }
 
+.square_marchinator { 
+  display: flex;
+  gap: 50px;
+}
 
 /* Pixel editor */
 #grid {
@@ -155,6 +159,7 @@ h1 {
 }
 
 #palette {
+  margin-top: 20px;
   width: calc(16 * 20px);
   display: flex;
   justify-content: space-between;
@@ -169,4 +174,8 @@ h1 {
 
 .color.selected {
   outline: 2px solid #999;
+}
+
+#output {
+  background-color: rgba(255, 255, 255, 0.075);
 }

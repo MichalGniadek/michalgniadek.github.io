@@ -2,10 +2,14 @@ import './style.css'
 import gun_in_a_well from './gun_in_a_well.png';
 import assembler from './assembler.png';
 import deamon from './deamon.png';
+import wizard_pixelart from './wizard_pixelart.png';
 import protorunner_video from './protorunner.webm';
 import protorunner from './protorunner.jpg';
 // @ts-ignore
 import jsdos_game from './bundle.jsdos?url';
+import init, { convert } from 'squre-marchinator';
+
+init();
 
 const afterInit: Array<() => void> = [];
 
@@ -94,8 +98,13 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     
     ${desc("Square Marchinator", "asd")}
     <div class="showcase big">
-      <div id="grid"></div>
-      <div id="palette"></div>
+      <div class="square_marchinator">
+        <div>
+          <div id="grid"></div>
+          <div id="palette"></div>
+        </div>
+        <canvas id="output" style="width: 320px; height: 320px;"></canvas>
+      </div>
     </div>
   </div>`;
 
@@ -105,41 +114,161 @@ for (const initF of afterInit) {
 
 // Pixel Editor
 
-const colors: string[] = ['#000000', '#ff0000', '#00ff00', '#0000ff', '#ffff00'];
+const outputCanvas = document.getElementById('output') as HTMLCanvasElement;
+outputCanvas.width = 16 * 16 + 16;
+outputCanvas.height = 16 * 16 + 16;
+const outCtx = outputCanvas.getContext('2d')!;
+
+function parseColor(colorStr: string): [number, number, number, number] {
+  const ctx = document.createElement('canvas').getContext('2d')!;
+  ctx.fillStyle = colorStr;
+  ctx.fillRect(0, 0, 1, 1);
+  const data = ctx.getImageData(0, 0, 1, 1).data;
+  return [data[0], data[1], data[2], data[3]];
+}
+
+function processGrid() {
+  const pixels = Array.from(document.querySelectorAll<HTMLDivElement>('#grid .pixel'));
+  const buf = new Uint8Array(16 * 16 * 4);
+  
+  pixels.forEach((pixel, i) => {
+    const bg = pixel.dataset.color;
+    if (bg) {
+      const rgba = parseColor(bg);
+      buf[i * 4 + 0] = rgba[0];
+      buf[i * 4 + 1] = rgba[1];
+      buf[i * 4 + 2] = rgba[2];
+      buf[i * 4 + 3] = rgba[3];
+    }
+  });
+
+  const result = convert(16, 16, buf, 3., 2.);
+  if (!result) {
+    console.warn('WASM processing failed');
+    return;
+  }
+  if (result.length !== outputCanvas.width * outputCanvas.height * 4) {
+    console.error('Output buffer size mismatch', result.length, outputCanvas.width * outputCanvas.height * 4);
+    return;
+  }
+  const imgData = new ImageData(new Uint8ClampedArray(result), outputCanvas.width, outputCanvas.height);
+  outCtx.putImageData(imgData, 0, 0);
+}
+
+let isProcessing = false;
+let scheduled = false;
+
+function scheduleProcessGrid() {
+  if (isProcessing) {
+    scheduled = true;
+    return;
+  }
+  isProcessing = true;
+  processGrid();
+  setTimeout(() => {
+    isProcessing = false;
+    if (scheduled) {
+      scheduled = false;
+      scheduleProcessGrid();
+    }
+  }, 250);
+}
+
+let colors: string[] = ['#000000', '#ff0000', '#00ff00', '#0000ff', '#ffff00'];
 let selectedColor: string = colors[0];
 
 const grid = document.getElementById('grid')!;
 const palette = document.getElementById('palette')!;
 
-for (let i = 0; i < 16 * 16; i++) {
-  const pixel = document.createElement('div');
-  pixel.className = 'pixel';
-  pixel.dataset.color = '';
+let isPainting: null | 'color' | 'erase' = null;
 
-  pixel.addEventListener('click', () => {
-    const currentColor = pixel.dataset.color;
-    if (currentColor === selectedColor) {
-      pixel.style.backgroundColor = 'rgba(255, 255, 255, 0.075)';
+function togglePixel(pixel: HTMLElement) {
+  if (isPainting === 'erase') {
+    pixel.style.backgroundColor = 'rgba(255, 255, 255, 0.075)';
+    pixel.dataset.color = '';
+  } else if (isPainting === 'color') {
+    pixel.style.backgroundColor = selectedColor;
+    pixel.dataset.color = selectedColor;
+  }
+  scheduleProcessGrid();
+}
+
+const img = new Image();
+img.src = wizard_pixelart;
+img.onload = () => { 
+  const canvas = document.createElement('canvas');
+  canvas.width = 16;
+  canvas.height = 16;
+  const ctx = canvas.getContext('2d')!;
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+
+  const cols = new Set<string>();
+
+  for (let i = 0; i < 16 * 16; i++) {
+    const r = imageData[(i * 4)];
+    const g = imageData[(i * 4) + 1];
+    const b = imageData[(i * 4) + 2];
+    const a = imageData[(i * 4) + 3];
+    
+    const pixel = document.createElement('div');
+    pixel.className = 'pixel';
+    if (a === 0) {
       pixel.dataset.color = '';
     } else {
-      pixel.style.backgroundColor = selectedColor;
-      pixel.dataset.color = selectedColor;
+      pixel.dataset.color = `rgba(${r},${g},${b},${(a / 255).toFixed(2)})`;
+      cols.add(pixel.dataset.color)
     }
-  });
+    pixel.style.backgroundColor = pixel.dataset.color;
 
-  grid.appendChild(pixel);
-}
+    pixel.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      const currentColor = pixel.dataset.color;
+      if (currentColor === selectedColor) {
+        isPainting = 'erase';
+      } else {
+        isPainting = 'color';
+      }
+      togglePixel(pixel);
+    });
 
-for (const color of colors) {
-  const colorDiv = document.createElement('div');
-  colorDiv.className = 'color';
-  colorDiv.style.backgroundColor = color;
-  colorDiv.addEventListener('click', () => {
-    selectedColor = color;
-    document.querySelectorAll('.color').forEach(c => c.classList.remove('selected'));
-    colorDiv.classList.add('selected');
-  });
-  palette.appendChild(colorDiv);
-}
+    pixel.addEventListener('mouseenter', () => {
+      if (isPainting) {
+        togglePixel(pixel);
+      }
+    });
+
+    pixel.addEventListener('mouseup', () => {
+      isPainting = null;
+    });
+
+    grid.appendChild(pixel);
+  }
+
+  colors = [...cols];
+  selectedColor = colors[0];
+
+  for (const color of colors) {
+    const colorDiv = document.createElement('div');
+    colorDiv.className = 'color';
+    colorDiv.style.backgroundColor = color;
+    colorDiv.addEventListener('click', () => {
+      selectedColor = color;
+      document.querySelectorAll('.color').forEach(c => c.classList.remove('selected'));
+      colorDiv.classList.add('selected');
+    });
+    palette.appendChild(colorDiv);
+  }
+
+  setTimeout(processGrid, 150);
+};
+
+grid.addEventListener('mouseleave', () => {
+  isPainting = null;
+});
+
+window.addEventListener('mouseup', () => {
+  isPainting = null;
+});
 
 palette.firstElementChild!.classList.add('selected');
