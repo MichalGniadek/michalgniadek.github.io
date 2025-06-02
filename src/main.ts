@@ -260,7 +260,7 @@ img.onload = () => {
     palette.appendChild(colorDiv);
   }
 
-  setTimeout(processGrid, 150);
+  setTimeout(processGrid, 1000);
 };
 
 grid.addEventListener('mouseleave', () => {
