@@ -2,7 +2,10 @@ import './style.css'
 import gun_in_a_well from './gun_in_a_well.png';
 import assembler from './assembler.png';
 import deamon from './deamon.png';
-import wizard_pixelart from './wizard_pixelart.png';
+import tile from './tile4.png';
+import restoration from './restoration.jpg';
+// https://feathericons.com as MIT license
+import play_icon from './play.svg';
 import protorunner_video from './protorunner.webm';
 import protorunner from './protorunner.jpg';
 // @ts-ignore
@@ -39,8 +42,11 @@ const showcase = (id: string, img: string, text: string, onClick: string, onClic
   return `
      <div class="showcase big">
       <button id=${id} class="showcase_button">
-        <img src=${img}>
-        <div>
+        <img class="top-bottom-border" src=${img}>
+        <div class="fill play_img fancy_colors">
+          <img src=${play_icon}>
+        </div>
+        <div class="fill text fancy_colors">
           ${text}
         </div>
       </button>
@@ -52,7 +58,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div class="toplevel">
     ${desc("Gun in a Well", "asd")}
     ${showcase("gun_in_a_well", gun_in_a_well, "Click to run", `
-      <iframe class="itch_embed" frameborder="0" src="https://itch.io/embed-upload/13659283?color=141414" allowfullscreen="">
+      <iframe class="itch_embed top-bottom-border" frameborder="0" src="https://itch.io/embed-upload/13659283?color=141414" allowfullscreen="">
         <a href="https://naruvan.itch.io/gun-in-a-well">Play Gun in a Well on itch.io</a>
       </iframe>
     `)}
@@ -72,38 +78,41 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
     ${desc("Shader Clock", "asd")}
     <div class="showcase big">
-      <iframe class="shadertoy_embed" frameborder="0" src="https://www.shadertoy.com/embed/3fd3zX?gui=false&t=10&paused=false&muted=false" allowfullscreen></iframe>
+      <iframe class="shadertoy_embed top-bottom-border" frameborder="0" src="https://www.shadertoy.com/embed/3fd3zX?gui=false&t=10&paused=false&muted=false" allowfullscreen></iframe>
     </div>
 
 
     ${showcase("deamon", deamon, "Click to run", `
-      <iframe class="itch_embed" frameborder="0" src="https://itch.io/embed-upload/13137580?color=141414" allowfullscreen="">
+      <iframe class="itch_embed top-bottom-border" frameborder="0" src="https://itch.io/embed-upload/13137580?color=141414" allowfullscreen="">
         <a href="https://naruvan.itch.io/daemon-resources-department">Play Daemon Resources Department on itch.io</a>
       </iframe>
     `)}
     ${desc("Daemon Resource Department", "asd", true)}
 
     ${desc("EXTREMELY OK PAINTING RESTORATION STUDIO", "asd")}
-    <div class="showcase big">
-      <iframe class="video_embed" src="https://www.youtube.com/embed/5fttXWCcJEc?si=512SX2hHcefYK568&start=92&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
+    ${showcase("restoration", restoration, "Click to watch", `
+      <div class="showcase big">
+        <iframe class="video_embed top-bottom-border" src="https://www.youtube.com/embed/5fttXWCcJEc?si=512SX2hHcefYK568&start=92&mute=1&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    `)}
+    
 
     
     ${showcase("protorunner", protorunner, "Click to watch", `
-      <video class="video_embed" controls autoplay muted>
+      <video class="video_embed top-bottom-border" controls autoplay muted>
         <source src=${protorunner_video}>
       </video>
     `)}
-    ${desc("Protunner", "asd")}
+    ${desc("Protorunner", "asd", true)}
     
     ${desc("Square Marchinator", "asd")}
     <div class="showcase big">
-      <div class="square_marchinator">
+      <div class="square_marchinator top-bottom-border">
         <div>
           <div id="grid"></div>
           <div id="palette"></div>
         </div>
-        <canvas id="output" style="width: 320px; height: 320px;"></canvas>
+        <canvas id="output"></canvas>
       </div>
     </div>
   </div>`;
@@ -114,9 +123,12 @@ for (const initF of afterInit) {
 
 // Pixel Editor
 
+const PIXEL_SIZE = 18;
+const PIXEL_SIZE_MULT = 16;
+
 const outputCanvas = document.getElementById('output') as HTMLCanvasElement;
-outputCanvas.width = 16 * 16 + 16;
-outputCanvas.height = 16 * 16 + 16;
+outputCanvas.width = PIXEL_SIZE * PIXEL_SIZE_MULT + PIXEL_SIZE_MULT;
+outputCanvas.height = PIXEL_SIZE * PIXEL_SIZE_MULT + PIXEL_SIZE_MULT;
 const outCtx = outputCanvas.getContext('2d')!;
 
 function parseColor(colorStr: string): [number, number, number, number] {
@@ -129,7 +141,7 @@ function parseColor(colorStr: string): [number, number, number, number] {
 
 function processGrid() {
   const pixels = Array.from(document.querySelectorAll<HTMLDivElement>('#grid .pixel'));
-  const buf = new Uint8Array(16 * 16 * 4);
+  const buf = new Uint8Array(PIXEL_SIZE * PIXEL_SIZE * 4);
   
   pixels.forEach((pixel, i) => {
     const bg = pixel.dataset.color;
@@ -142,7 +154,7 @@ function processGrid() {
     }
   });
 
-  const result = convert(16, 16, buf, 3., 2.);
+  const result = convert(PIXEL_SIZE, PIXEL_SIZE, buf, 3., 2.);
   if (!result) {
     console.warn('WASM processing failed');
     return;
@@ -194,18 +206,18 @@ function togglePixel(pixel: HTMLElement) {
 }
 
 const img = new Image();
-img.src = wizard_pixelart;
+img.src = tile;
 img.onload = () => { 
   const canvas = document.createElement('canvas');
-  canvas.width = 16;
-  canvas.height = 16;
+  canvas.width = PIXEL_SIZE;
+  canvas.height = PIXEL_SIZE;
   const ctx = canvas.getContext('2d')!;
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 
   const cols = new Set<string>();
 
-  for (let i = 0; i < 16 * 16; i++) {
+  for (let i = 0; i < PIXEL_SIZE * PIXEL_SIZE; i++) {
     const r = imageData[(i * 4)];
     const g = imageData[(i * 4) + 1];
     const b = imageData[(i * 4) + 2];

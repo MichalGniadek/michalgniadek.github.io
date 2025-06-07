@@ -5,7 +5,8 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* background-color: #1e1229; */
+  background: linear-gradient(135deg, #030735, #400202);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,6 +22,13 @@
   a:hover {
     color: #747bff;
   }
+}
+
+.fancy_colors {
+  filter: drop-shadow(3px 3px 3px #EE4266) 
+          drop-shadow(-3px 3px 3px #2A1E5C) 
+          drop-shadow(3px -3px 3px #2A1E5C) 
+          drop-shadow(-3px -3px 3px #EE4266);
 }
 
 .shantell-sans {
@@ -62,6 +70,11 @@ h1 {
   font-size: 2em;
   font-weight: 500;
   line-height: 1.1;
+  text-decoration: underline;
+  text-decoration-thickness: 0.2rem;
+  text-decoration-color: #EE4266;
+  border-top: 0.5rem solid #2A1E5C;
+  margin-top: 0;
 }
 
 .toplevel {
@@ -99,6 +112,11 @@ h1 {
   aspect-ratio: 1.777;
 }
 
+.top-bottom-border {
+  border-top: 0.5rem solid #2A1E5C;
+  border-bottom: 0.5rem solid #EE4266;
+}
+
 .showcase_button {
   position: relative;
   display: inline-block;
@@ -111,10 +129,10 @@ h1 {
 }
 
 .showcase_button:hover > img {
-  filter: blur(0.3em) brightness(0.4);
+  filter: blur(0.3em) contrast(0.7) opacity(0.4);
 }
 
-.showcase_button > div {
+.fill {
   position: absolute;
   left: 0;
   top: 0;
@@ -123,31 +141,54 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.play_img {
+  transition: opacity 0.2s ease;
+}
+
+.showcase_button:hover > .play_img {
+  opacity: 0;
+}
+
+.play_img > img {
+  filter: invert(1);
+  width: 100px;
+  color: white;
+  border-radius: 40%;
+}
+
+.showcase_button > .text {
   font-size: 4em;
   opacity: 0;
   transition: opacity 0.2s ease;
 }
 
-.showcase_button:hover > div {
+.showcase_button:hover > .text {
   opacity: 1;
 }
 
 .square_marchinator { 
   display: flex;
-  gap: 50px;
+  justify-content: space-between;
 }
 
 /* Pixel editor */
 #grid {
   display: grid;
-  grid-template-columns: repeat(16, 20px);
-  grid-template-rows: repeat(16, 20px);
+  grid-template-columns: repeat(18, 18px);
+  grid-template-rows: repeat(18, 18px);
   gap: 0px;
 }
 
+#output {
+  height: calc(18 * 18px);
+  width: calc(18 * 18px);
+}
+
 .pixel {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background: rgba(255, 255, 255, 0.075);
   border: 1px solid #cccccc07;
   cursor: pointer;
@@ -162,7 +203,7 @@ h1 {
   margin-top: 20px;
   width: calc(16 * 20px);
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
 }
 
 .color {
