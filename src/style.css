@@ -6,7 +6,7 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   /* background-color: #1e1229; */
-  background: linear-gradient(135deg, #030735, #400202);
+  background: linear-gradient(135deg, #030735, #40020f);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -71,9 +71,10 @@ h1 {
   font-weight: 500;
   line-height: 1.1;
   text-decoration: underline;
-  text-decoration-thickness: 0.2rem;
-  text-decoration-color: #EE4266;
-  border-top: 0.5rem solid #2A1E5C;
+  text-decoration-thickness: 0.5rem;
+  text-decoration-color: #2A1E5C;
+  border-top: 0.5rem solid #EE4266;
+  /* border-bottom: 0.5rem solid #2A1E5C; */
   margin-top: 0;
 }
 
