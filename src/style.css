@@ -12,7 +12,7 @@
   background-attachment: fixed;
 
   animation-name: background-anim;
-  animation-duration: 40s;
+  animation-duration: 30s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;
@@ -106,12 +106,35 @@ h1 {
 .toplevel {
   padding: 3em;
   display: grid;
-  grid-template-columns: 1fr 0.5fr 1fr;
-  gap: 10em 0em;
+  grid-auto-flow: dense;
+  grid-template-columns: 1fr;
+  gap: 2em 0em;
 }
 
 .big {
-  grid-column-start: span 2;
+  padding-bottom: 6em;
+}
+
+@media (min-width:961px) {
+  .toplevel {
+    grid-template-columns: 1fr 0.5fr 1fr;
+  }
+
+  .big.right {
+    grid-column: 2/span 2;
+  }
+
+  .big.left {
+    grid-column: 1/span 2;
+  }
+
+  :not(.big).right {
+    grid-column: 3/span 1;
+  }
+
+  :not(.big).left {
+    grid-column: 1/span 1;
+  }
 }
 
 .description {
@@ -217,12 +240,11 @@ h1 {
 }
 
 .pills {
-  padding-top: 20px;
   display: flex;
   gap: 20px;
 }
 
-.right.pills {
+.right .pills {
   justify-content: right;
 }
 
@@ -244,6 +266,8 @@ a.pill, .pill {
   background-color: #ee426714;
   outline: 2px solid #EE4266;
   border-radius: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 3px 10px 4px 7px;
   font-weight: 600;
   transition: outline-width 0.1s linear;
@@ -284,7 +308,7 @@ a.pill, .pill {
 
 .pixel:hover {
   outline: 2px solid #999;
-  outline-offset: -2px;
+  outline-offset: -4px;
 }
 
 #palette {

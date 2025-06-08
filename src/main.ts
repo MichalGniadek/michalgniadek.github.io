@@ -5,6 +5,8 @@ import deamon from './deamon.png';
 import tile from './tile4.png';
 import restoration from './restoration.jpg';
 import godot from './godot.png';
+import rust from './rust.png';
+import bevy from './bevy.svg';
 // https://feathericons.com as MIT license
 import play_icon from './play.svg';
 import protorunner_video from './protorunner.webm';
@@ -41,16 +43,20 @@ const pills = {
   vfx: pill(godot, "VFX"),
   assembler: pill(godot, "Assembler"),
   glsl: pill(godot, "GLSL"),
-  unity: pill(godot, "Unity"),
-  rust: pill(godot, "Rust"),
+  unity: pill(godot, "Unity", "https://unity.com/"),
+  rust: pill(rust, "Rust", "https://www.rust-lang.org/"),
   tool: pill(godot, "Tool"),
-  bevy: pill(godot, "Bevy"),
+  bevy: pill(bevy, "Bevy", "https://bevy.org/"),
+  physical: pill(godot, "Physical"),
+  mobile: pill(godot, "Mobile"),
 };
 
 const desc = (title: string, body: string, right: boolean = false) => {
   let r = "";
   if (right) {
     r = "right";
+  } else {
+    r = "left"
   };
   return `
   <div class="description ${r}">
@@ -66,6 +72,8 @@ const showcase = (id: string, right: boolean, img: string, text: string, pills: 
   let r = "";
   if (right) {
     r = "right";
+  } else {
+    r = "left"
   };
   
   const embed_id = id + "_embed";
@@ -86,7 +94,7 @@ const showcase = (id: string, right: boolean, img: string, text: string, pills: 
     });
   });
   return `
-     <div class="showcase big">
+     <div class="showcase big ${r}">
       <div>
         <button id=${button_id} class="showcase_button">
           <img class="top-bottom-border" src=${img}>
@@ -99,7 +107,7 @@ const showcase = (id: string, right: boolean, img: string, text: string, pills: 
         </button>
       </div>
       <div id=${embed_id}></div>
-      <div class="pills ${r}">
+      <div class="pills">
         ${pills.join("")}
       </div>
     </div>
@@ -108,13 +116,29 @@ const showcase = (id: string, right: boolean, img: string, text: string, pills: 
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div class="toplevel">
-    ${desc("Gun in a Well", "asd")}
+    ${desc("Gun in a Well", "asd" + pill(godot, "Read GDD", "https://docs.google.com/document/d/1QmWzavC7sPQ4W5hAaHghU5D2UPZIBXyFjJylpJIrC14/edit?usp=sharing") + "asd")}
     ${showcase("gun_in_a_well", true, gun_in_a_well, "Click to run", [pills.godot, pills.gamedesign, pills.vfx], `
       <iframe class="itch_embed top-bottom-border" frameborder="0" src="https://itch.io/embed-upload/13659283?color=141414" allowfullscreen="">
         <a href="https://naruvan.itch.io/gun-in-a-well">Play Gun in a Well on itch.io</a>
       </iframe>
     `)}
-    
+
+    ${desc("Daemon Resource Department", "asd", true)}
+    ${showcase("deamon", false, deamon, "Click to run", [pills.godot, pills.gamedesign, pills.vfx], `
+      <iframe class="itch_embed top-bottom-border" frameborder="0" src="https://itch.io/embed-upload/13137580?color=141414" allowfullscreen="">
+        <a href="https://naruvan.itch.io/daemon-resources-department">Play Daemon Resources Department on itch.io</a>
+      </iframe>
+    `)}
+
+    ${desc("Shader Clock", "asd")}
+    <div class="showcase big right">
+      <iframe class="shadertoy_embed top-bottom-border" frameborder="0" src="https://www.shadertoy.com/embed/3fd3zX?gui=false&t=10&paused=false&muted=false" allowfullscreen></iframe>
+      <div class="pills right">
+        ${[pills.glsl, pills.vfx].join("")}
+      </div>
+    </div>
+
+    ${desc("Assembler stuffs", "asd", true)}
     ${showcase("assebler", false, assembler, "Click to run", [pills.assembler], `
       <div id="dos" class="top-bottom-border" tabindex="0"></div>
     `, () => {
@@ -126,23 +150,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         noCloud: true,
       });
     })}
-    ${desc("Assembler stuffs", "asd", true)}
-
-    ${desc("Shader Clock", "asd")}
-    <div class="showcase big">
-      <iframe class="shadertoy_embed top-bottom-border" frameborder="0" src="https://www.shadertoy.com/embed/3fd3zX?gui=false&t=10&paused=false&muted=false" allowfullscreen></iframe>
-      <div class="pills right">
-        ${[pills.glsl, pills.vfx].join("")}
-      </div>
-    </div>
-
-
-    ${showcase("deamon", false, deamon, "Click to run", [pills.godot, pills.gamedesign, pills.vfx], `
-      <iframe class="itch_embed top-bottom-border" frameborder="0" src="https://itch.io/embed-upload/13137580?color=141414" allowfullscreen="">
-        <a href="https://naruvan.itch.io/daemon-resources-department">Play Daemon Resources Department on itch.io</a>
-      </iframe>
-    `)}
-    ${desc("Daemon Resource Department", "asd", true)}
 
     ${desc("Extremely Ok Painting Restoration Studio", "asd")}
     ${showcase("restoration", true, restoration, "Click to watch", [pills.unity, pills.gamedesign], `
@@ -151,16 +158,15 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       </div>
     `)}
     
-
+    ${desc("Protorunner", "asd", true)}
     ${showcase("protorunner", false, protorunner, "Click to watch", [pills.unity, pills.gamedesign], `
       <video class="video_embed top-bottom-border" controls autoplay muted>
         <source src=${protorunner_video}>
       </video>
     `)}
-    ${desc("Protorunner", "asd", true)}
     
     ${desc("Square Marchinator", "asd")}
-    <div class="showcase big">
+    <div class="showcase big right">
       <div class="square_marchinator top-bottom-border">
         <div>
           <div id="grid"></div>
@@ -172,6 +178,21 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         ${[pills.rust, pills.tool].join("")}
       </div>
     </div>
+
+    ${desc("Fluid Simulation", "asd", true)}
+    ${showcase("fluid", false, deamon, "Click to run", [pills.rust, pills.bevy], `
+     // TODO
+    `)}
+
+    ${desc("Quick! Star Adventure", "asd" + pill(godot, "Read Manual (PL)", "https://docs.google.com/document/d/1PWics277INgrgUChXesr9yj4wXu-0R_LA31JhHfeAOM/edit?usp=sharing") + "asd", false)}
+    ${showcase("quick", true, deamon, "Click to run", [pills.physical, pills.gamedesign, pills.mobile], `
+     // TODO
+    `)}
+
+    ${desc("The Nightsky", "asd" + pill(godot, "Read Manual (EN)", "https://docs.google.com/document/d/1rBhy3hmvSn_Y10s-qRRIhcGWPf7vP6mEJt1ecXf9cug/edit?usp=sharing") + "asd", true)}
+    ${showcase("stars", false, deamon, "Click to run", [pills.physical, pills.gamedesign], `
+     // TODO
+    `)}
   </div>`;
 
 for (const initF of afterInit) {
