@@ -4,6 +4,7 @@ import assembler from './assembler.png';
 import deamon from './deamon.png';
 import tile from './tile4.png';
 import restoration from './restoration.jpg';
+import godot from './godot.png';
 // https://feathericons.com as MIT license
 import play_icon from './play.svg';
 import protorunner_video from './protorunner.webm';
@@ -15,6 +16,36 @@ import init, { convert } from 'squre-marchinator';
 init();
 
 const afterInit: Array<() => void> = [];
+
+const pill = (img: string, text: string, url: string | null = null) => {
+  if (url != null) {
+    return `
+    <a href=${url} class="pill">
+      <img class="fancy_colors" src=${img}>
+      ${text}
+    </a>
+    `  
+  } else {
+    return `
+    <div class="pill">
+      <img class="fancy_colors" src=${img}>
+      ${text}
+    </div>
+  `
+  }
+}
+
+const pills = {
+  godot: pill(godot, "Godot", "https://godotengine.org/"),
+  gamedesign: pill(godot, "Game Design"),
+  vfx: pill(godot, "VFX"),
+  assembler: pill(godot, "Assembler"),
+  glsl: pill(godot, "GLSL"),
+  unity: pill(godot, "Unity"),
+  rust: pill(godot, "Rust"),
+  tool: pill(godot, "Tool"),
+  bevy: pill(godot, "Bevy"),
+};
 
 const desc = (title: string, body: string, right: boolean = false) => {
   let r = "";
@@ -31,7 +62,12 @@ const desc = (title: string, body: string, right: boolean = false) => {
   `;
 }
 
-const showcase = (id: string, img: string, text: string, onClick: string, onClickInit: () => void = () => { }) => {
+const showcase = (id: string, right: boolean, img: string, text: string, pills: string[], onClick: string, onClickInit: () => void = () => { }) => {
+  let r = "";
+  if (right) {
+    r = "right";
+  };
+  
   afterInit.push(() => {
     const gunInAWellImg = document.querySelector<HTMLButtonElement>(`#${id}`)!;
     gunInAWellImg.addEventListener("click", () => {
@@ -41,15 +77,20 @@ const showcase = (id: string, img: string, text: string, onClick: string, onClic
   });
   return `
      <div class="showcase big">
-      <button id=${id} class="showcase_button">
-        <img class="top-bottom-border" src=${img}>
-        <div class="fill play_img fancy_colors">
-          <img src=${play_icon}>
-        </div>
-        <div class="fill text fancy_colors">
-          ${text}
-        </div>
-      </button>
+      <div>
+        <button id=${id} class="showcase_button">
+          <img class="top-bottom-border" src=${img}>
+          <div class="fill play_img fancy_colors">
+            <img src=${play_icon}>
+          </div>
+          <div class="fill text fancy_colors">
+            ${text}
+          </div>
+        </button>
+      </div>
+      <div class="pills ${r}">
+        ${pills.join("")}
+      </div>
     </div>
     `
 };
@@ -57,14 +98,14 @@ const showcase = (id: string, img: string, text: string, onClick: string, onClic
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div class="toplevel">
     ${desc("Gun in a Well", "asd")}
-    ${showcase("gun_in_a_well", gun_in_a_well, "Click to run", `
+    ${showcase("gun_in_a_well", true, gun_in_a_well, "Click to run", [pills.godot, pills.gamedesign, pills.vfx], `
       <iframe class="itch_embed top-bottom-border" frameborder="0" src="https://itch.io/embed-upload/13659283?color=141414" allowfullscreen="">
         <a href="https://naruvan.itch.io/gun-in-a-well">Play Gun in a Well on itch.io</a>
       </iframe>
     `)}
     
-    ${showcase("assebler", assembler, "Click to run", `
-      <div id="dos" tabindex="0"></div>
+    ${showcase("assebler", false, assembler, "Click to run", [pills.assembler], `
+      <div id="dos" class="top-bottom-border" tabindex="0"></div>
     `, () => {
       // @ts-expect-error
       const dos = Dos(document.getElementById("dos"), {
@@ -79,26 +120,28 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     ${desc("Shader Clock", "asd")}
     <div class="showcase big">
       <iframe class="shadertoy_embed top-bottom-border" frameborder="0" src="https://www.shadertoy.com/embed/3fd3zX?gui=false&t=10&paused=false&muted=false" allowfullscreen></iframe>
+      <div class="pills right">
+        ${[pills.glsl, pills.vfx].join("")}
+      </div>
     </div>
 
 
-    ${showcase("deamon", deamon, "Click to run", `
+    ${showcase("deamon", false, deamon, "Click to run", [pills.godot, pills.gamedesign, pills.vfx], `
       <iframe class="itch_embed top-bottom-border" frameborder="0" src="https://itch.io/embed-upload/13137580?color=141414" allowfullscreen="">
         <a href="https://naruvan.itch.io/daemon-resources-department">Play Daemon Resources Department on itch.io</a>
       </iframe>
     `)}
     ${desc("Daemon Resource Department", "asd", true)}
 
-    ${desc("EXTREMELY OK PAINTING RESTORATION STUDIO", "asd")}
-    ${showcase("restoration", restoration, "Click to watch", `
+    ${desc("Extremely Ok Painting Restoration Studio", "asd")}
+    ${showcase("restoration", true, restoration, "Click to watch", [pills.unity, pills.gamedesign], `
       <div class="showcase big">
         <iframe class="video_embed top-bottom-border" src="https://www.youtube.com/embed/5fttXWCcJEc?si=512SX2hHcefYK568&start=92&mute=1&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
     `)}
     
 
-    
-    ${showcase("protorunner", protorunner, "Click to watch", `
+    ${showcase("protorunner", false, protorunner, "Click to watch", [pills.unity, pills.gamedesign], `
       <video class="video_embed top-bottom-border" controls autoplay muted>
         <source src=${protorunner_video}>
       </video>
@@ -113,6 +156,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           <div id="palette"></div>
         </div>
         <canvas id="output"></canvas>
+      </div>
+      <div class="pills right">
+        ${[pills.rust, pills.tool].join("")}
       </div>
     </div>
   </div>`;

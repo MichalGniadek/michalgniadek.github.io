@@ -5,13 +5,34 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  /* background-color: #1e1229; */
-  background: linear-gradient(135deg, #030735, #40020f);
+  
+  background: linear-gradient(135deg, #030735, #00000000);
+  background-color: #40020f;
+  background-size: 150vw 100vh;
+  background-attachment: fixed;
+
+  animation-name: background-anim;
+  animation-duration: 40s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes background-anim {
+  0% {
+		background-position: 0% 0%;
+	}
+	50% {
+		background-position: 100% 0%;
+	}
+	100% {
+		background-position: 0% 0%;
+	}
 }
 
 @media (prefers-color-scheme: light) {
@@ -74,8 +95,12 @@ h1 {
   text-decoration-thickness: 0.5rem;
   text-decoration-color: #2A1E5C;
   border-top: 0.5rem solid #EE4266;
-  /* border-bottom: 0.5rem solid #2A1E5C; */
-  margin-top: 0;
+  margin-top: 1px;
+  transition: text-decoration-thickness 0.2s ease;
+}
+
+.description:hover > h1 {
+  text-decoration-thickness: 0.8rem;
 }
 
 .toplevel {
@@ -92,6 +117,10 @@ h1 {
 .description {
   margin-left: 1em;
   margin-right: 1em;
+}
+
+.showcase, h1 {
+  filter: drop-shadow(10px 10px 10px rgb(5, 1, 12));
 }
 
 .showcase_button > img {
@@ -122,6 +151,7 @@ h1 {
   position: relative;
   display: inline-block;
   cursor: pointer;
+  transition: scale 0.3s ease;
 }
 
 .showcase_button > img {
@@ -148,6 +178,10 @@ h1 {
   transition: opacity 0.2s ease;
 }
 
+.showcase_button:hover {
+  scale: 1.02;
+}
+
 .showcase_button:hover > .play_img {
   opacity: 0;
 }
@@ -172,6 +206,48 @@ h1 {
 .square_marchinator { 
   display: flex;
   justify-content: space-between;
+}
+
+.pills {
+  padding-top: 10px;
+  display: flex;
+  gap: 20px;
+}
+
+.right.pills {
+  justify-content: right;
+}
+
+a.pill {
+  all: unset;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+a.pill, .pill {
+  overflow: hidden;
+  display: flex;
+  width: min-content;
+  height: min-content;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  gap: 0.5em;
+  background-color: #ee426714;
+  outline: 2px solid #EE4266;
+  border-radius: 20px;
+  padding: 3px 10px 4px 7px;
+  font-weight: 600;
+  transition: outline-width 0.1s linear;
+}
+
+.pill > img {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.pill:hover {
+  outline-width: 4px;
 }
 
 /* Pixel editor */
