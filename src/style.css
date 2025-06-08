@@ -35,16 +35,6 @@
 	}
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-}
-
 .fancy_colors {
   filter: drop-shadow(3px 3px 3px #EE4266) 
           drop-shadow(-3px 3px 3px #2A1E5C) 
