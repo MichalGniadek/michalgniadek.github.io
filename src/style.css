@@ -178,8 +178,16 @@ h1 {
   transition: opacity 0.2s ease;
 }
 
+.play_img > img {
+  transition: scale 0.2s ease;
+}
+
 .showcase_button:hover {
   scale: 1.02;
+}
+
+.showcase_button:hover .play_img > img {
+  scale: 0.2;
 }
 
 .showcase_button:hover > .play_img {
@@ -199,7 +207,7 @@ h1 {
   transition: opacity 0.2s ease;
 }
 
-.showcase_button:hover > .text {
+.showcase_button:hover:not(.clicked) > .text {
   opacity: 1;
 }
 
@@ -209,7 +217,7 @@ h1 {
 }
 
 .pills {
-  padding-top: 10px;
+  padding-top: 20px;
   display: flex;
   gap: 20px;
 }
@@ -252,6 +260,8 @@ a.pill, .pill {
 
 /* Pixel editor */
 #grid {
+  padding-top: 20px;
+  padding-left: calc(18px * 2);
   display: grid;
   grid-template-columns: repeat(18, 18px);
   grid-template-rows: repeat(18, 18px);
@@ -259,6 +269,7 @@ a.pill, .pill {
 }
 
 #output {
+  padding-top: 20px;
   height: calc(18 * 18px);
   width: calc(18 * 18px);
 }
@@ -278,9 +289,20 @@ a.pill, .pill {
 
 #palette {
   margin-top: 20px;
-  width: calc(16 * 20px);
+  width: 100%;
+  padding-left: 18px;
+  padding-bottom: 20px;
   display: flex;
   gap: 20px;
+  justify-content: center;
+}
+
+#palette > * {
+  transition: scale 0.1s ease;
+}
+
+#palette > :hover {
+  scale: 1.2;
 }
 
 .color {
@@ -291,9 +313,5 @@ a.pill, .pill {
 }
 
 .color.selected {
-  outline: 2px solid #999;
-}
-
-#output {
-  background-color: rgba(255, 255, 255, 0.075);
+  scale: 1.2;
 }

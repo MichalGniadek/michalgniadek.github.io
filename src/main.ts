@@ -68,17 +68,27 @@ const showcase = (id: string, right: boolean, img: string, text: string, pills: 
     r = "right";
   };
   
+  const embed_id = id + "_embed";
+  const button_id = id + "_button";
+
   afterInit.push(() => {
-    const gunInAWellImg = document.querySelector<HTMLButtonElement>(`#${id}`)!;
-    gunInAWellImg.addEventListener("click", () => {
-      gunInAWellImg.parentElement!.innerHTML = onClick;
+    const btn = document.querySelector<HTMLButtonElement>(`#${button_id}`)!;
+    const embed = document.querySelector<HTMLDivElement>(`#${embed_id}`)!;
+    btn.addEventListener("click", () => {
+      btn.classList.add("clicked");
+      embed.innerHTML = onClick;
+      embed.style = "display: none"
       onClickInit();
+      setTimeout(() => {
+        embed.style = "";
+        btn.parentElement!.removeChild(btn);
+      }, 200)
     });
   });
   return `
      <div class="showcase big">
       <div>
-        <button id=${id} class="showcase_button">
+        <button id=${button_id} class="showcase_button">
           <img class="top-bottom-border" src=${img}>
           <div class="fill play_img fancy_colors">
             <img src=${play_icon}>
@@ -88,6 +98,7 @@ const showcase = (id: string, right: boolean, img: string, text: string, pills: 
           </div>
         </button>
       </div>
+      <div id=${embed_id}></div>
       <div class="pills ${r}">
         ${pills.join("")}
       </div>
