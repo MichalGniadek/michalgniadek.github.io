@@ -6,8 +6,8 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   
-  background: linear-gradient(135deg, #030735, #00000000);
-  background-color: #40020f;
+  background: linear-gradient(135deg, #07092c, #00000000);
+  background-color: #300610;
   background-size: 150vw 100vh;
   background-attachment: fixed;
 
@@ -42,15 +42,12 @@
           drop-shadow(-3px -3px 3px #EE4266);
 }
 
-.shantell-sans {
-  font-family: "Shantell Sans", cursive;
+.ibm-plex-sans {
+  font-family: "IBM Plex Sans", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 400;
   font-style: normal;
   font-variation-settings:
-    "BNCE" 0,
-    "INFM" 0,
-    "SPAC" 0;
+    "wdth" 100;
 }
 
 body {
@@ -81,12 +78,21 @@ h1 {
   font-size: 2em;
   font-weight: 500;
   line-height: 1.1;
-  text-decoration: underline;
-  text-decoration-thickness: 0.5rem;
-  text-decoration-color: #2A1E5C;
+  /* text-decoration: underline; */
+  /* text-decoration-thickness: 0.5rem; */
+  /* text-decoration-color: #EE4266; */
   border-top: 0.5rem solid #EE4266;
   margin-top: 1px;
+  padding-top: 0.3em;
   transition: text-decoration-thickness 0.2s ease;
+}
+
+.left h1 {
+  margin-right: 0.3em;
+}
+
+.right h1 {
+  margin-left: 0.3em;
 }
 
 .description:hover > h1 {
@@ -132,8 +138,11 @@ h1 {
   margin-right: 1em;
 }
 
-.showcase, h1 {
-  filter: drop-shadow(10px 10px 10px rgb(5, 1, 12));
+.showcase {
+  filter: drop-shadow(10px 10px 10px rgba(5, 1, 12, 0.954));
+}
+h1 {
+  filter: drop-shadow(5px 5px 3px rgb(5, 1, 12));
 }
 
 .showcase_button > img {
@@ -156,8 +165,8 @@ h1 {
 }
 
 .top-bottom-border {
-  border-top: 0.5rem solid #2A1E5C;
-  border-bottom: 0.5rem solid #EE4266;
+  border-top: 0.5rem solid #EE4266;
+  /* border-bottom: 0.5rem solid #EE4266; */
 }
 
 .showcase_button {

@@ -115,7 +115,7 @@ const showcase = (id: string, right: boolean, img: string, text: string, pills: 
 };
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div class="toplevel">
+  <div class="toplevel ibm-plex-sans">
     ${desc("Gun in a Well", "asd" + pill(godot, "Read GDD", "https://docs.google.com/document/d/1QmWzavC7sPQ4W5hAaHghU5D2UPZIBXyFjJylpJIrC14/edit?usp=sharing") + "asd")}
     ${showcase("gun_in_a_well", true, gun_in_a_well, "Click to run", [pills.godot, pills.gamedesign, pills.vfx], `
       <iframe class="itch_embed top-bottom-border" frameborder="0" src="https://itch.io/embed-upload/13659283?color=141414" allowfullscreen="">
