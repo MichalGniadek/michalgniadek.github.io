@@ -7,6 +7,7 @@ import restoration from './restoration.jpg';
 import godot from './godot.png';
 import rust from './rust.png';
 import bevy from './bevy.svg';
+import dino from './dino.png';
 // https://feathericons.com as MIT license
 import play_icon from './play.svg';
 import protorunner_video from './protorunner.webm';
@@ -184,16 +185,16 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
      // TODO
     `)}
 
-    ${desc("Quick! Star Adventure", "asd" + pill(godot, "Read Manual (PL)", "https://docs.google.com/document/d/1PWics277INgrgUChXesr9yj4wXu-0R_LA31JhHfeAOM/edit?usp=sharing") + "asd", false)}
-    ${showcase("quick", true, deamon, "Click to run", [pills.physical, pills.gamedesign, pills.mobile], `
-     // TODO
-    `)}
-
-    ${desc("The Nightsky", "asd" + pill(godot, "Read Manual (EN)", "https://docs.google.com/document/d/1rBhy3hmvSn_Y10s-qRRIhcGWPf7vP6mEJt1ecXf9cug/edit?usp=sharing") + "asd", true)}
-    ${showcase("stars", false, deamon, "Click to run", [pills.physical, pills.gamedesign], `
+    ${desc("The Nightsky", "asd" + pill(godot, "Read Manual (EN)", "https://drive.google.com/file/d/153kmZe16xE8_qR6NUyYYeHrjAf068j4Y/view?usp=drive_link") + "asd", false)}
+    ${showcase("stars", true, deamon, "Click to run", [pills.physical, pills.gamedesign], `
      // TODO
     `)}
   </div>`;
+
+// ${desc("Quick! Star Adventure", "asd" + pill(godot, "Read Manual (PL)", "https://docs.google.com/document/d/1PWics277INgrgUChXesr9yj4wXu-0R_LA31JhHfeAOM/edit?usp=sharing") + "asd", false)}
+//     ${showcase("quick", true, deamon, "Click to run", [pills.physical, pills.gamedesign, pills.mobile], `
+//      // TODO
+//     `)}
 
 for (const initF of afterInit) {
   initF();
@@ -201,12 +202,12 @@ for (const initF of afterInit) {
 
 // Pixel Editor
 
-const PIXEL_SIZE = 18;
+const PIXEL_SIZE: [number, number] = [30, 24];
 const PIXEL_SIZE_MULT = 16;
 
 const outputCanvas = document.getElementById('output') as HTMLCanvasElement;
-outputCanvas.width = PIXEL_SIZE * PIXEL_SIZE_MULT + PIXEL_SIZE_MULT;
-outputCanvas.height = PIXEL_SIZE * PIXEL_SIZE_MULT + PIXEL_SIZE_MULT;
+outputCanvas.width = PIXEL_SIZE[0] * PIXEL_SIZE_MULT + PIXEL_SIZE_MULT;
+outputCanvas.height = PIXEL_SIZE[1] * PIXEL_SIZE_MULT + PIXEL_SIZE_MULT;
 const outCtx = outputCanvas.getContext('2d')!;
 
 function parseColor(colorStr: string): [number, number, number, number] {
@@ -219,7 +220,7 @@ function parseColor(colorStr: string): [number, number, number, number] {
 
 function processGrid() {
   const pixels = Array.from(document.querySelectorAll<HTMLDivElement>('#grid .pixel'));
-  const buf = new Uint8Array(PIXEL_SIZE * PIXEL_SIZE * 4);
+  const buf = new Uint8Array(PIXEL_SIZE[0] * PIXEL_SIZE[1] * 4);
   
   pixels.forEach((pixel, i) => {
     const bg = pixel.dataset.color;
@@ -232,7 +233,7 @@ function processGrid() {
     }
   });
 
-  const result = convert(PIXEL_SIZE, PIXEL_SIZE, buf, 3., 2.);
+  const result = convert(PIXEL_SIZE[0], PIXEL_SIZE[1], buf, 4., 4.);
   if (!result) {
     console.warn('WASM processing failed');
     return;
@@ -284,18 +285,18 @@ function togglePixel(pixel: HTMLElement) {
 }
 
 const img = new Image();
-img.src = tile;
+img.src = dino;
 img.onload = () => { 
   const canvas = document.createElement('canvas');
-  canvas.width = PIXEL_SIZE;
-  canvas.height = PIXEL_SIZE;
+  canvas.width = PIXEL_SIZE[0];
+  canvas.height = PIXEL_SIZE[1];
   const ctx = canvas.getContext('2d')!;
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 
   const cols = new Set<string>();
 
-  for (let i = 0; i < PIXEL_SIZE * PIXEL_SIZE; i++) {
+  for (let i = 0; i < PIXEL_SIZE[0] * PIXEL_SIZE[1]; i++) {
     const r = imageData[(i * 4)];
     const g = imageData[(i * 4) + 1];
     const b = imageData[(i * 4) + 2];
