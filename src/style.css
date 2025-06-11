@@ -42,6 +42,14 @@
           drop-shadow(-3px -3px 3px #EE4266);
 }
 
+.fancy_colors.invert {
+  filter: invert()
+          drop-shadow(3px 3px 3px #EE4266) 
+          drop-shadow(-3px 3px 3px #2A1E5C) 
+          drop-shadow(3px -3px 3px #2A1E5C) 
+          drop-shadow(-3px -3px 3px #EE4266);
+}
+
 .ibm-plex-sans {
   font-family: "IBM Plex Sans", sans-serif;
   font-optical-sizing: auto;
@@ -131,6 +139,16 @@ h1 {
   :not(.big).left {
     grid-column: 1/span 1;
   }
+}
+
+.header {
+  grid-column: 1/span 3;
+  margin-bottom: 1em;
+}
+
+.header h1 {
+  border: none;
+  font-size: 3em;
 }
 
 .description {
