@@ -233,14 +233,6 @@ h1 {
   opacity: 1;
 }
 
-.square_marchinator { 
-  display: flex;
-  justify-content: space-between;
-  --pixel-width: 30;
-  --pixel-height: 24;
-  --pixel-size: 12px;
-}
-
 .pills {
   display: flex;
   gap: 20px;
@@ -284,60 +276,10 @@ a.pill, .pill {
   outline-width: 4px;
 }
 
-/* Pixel editor */
-#grid {
-  padding-top: 20px;
-  padding-left: calc(var(--pixel-width) * 2);
-  display: grid;
-  grid-template-columns: repeat(var(--pixel-width), var(--pixel-size));
-  grid-template-rows: repeat(var(--pixel-height), var(--pixel-size));
-  gap: 0px;
-}
-
-#output {
-  padding-top: 20px;
-  width: calc(var(--pixel-width) * var(--pixel-size));
-  height: calc(var(--pixel-height) * var(--pixel-size));
-}
-
-.pixel {
-  width: var(--pixel-size);
-  height: var(--pixel-size);
-  background: rgba(255, 255, 255, 0.075);
-  border: 1px solid #cccccc07;
-  cursor: pointer;
-}
-
-.pixel:hover {
-  outline: 2px solid #999;
-  outline-offset: -4px;
-}
-
-#palette {
-  margin-top: 20px;
-  width: 100%;
-  padding-left: 18px;
-  padding-bottom: 20px;
+.square_marchinator { 
   display: flex;
-  gap: 20px;
-  justify-content: center;
-}
-
-#palette > * {
-  transition: scale 0.1s ease;
-}
-
-#palette > :hover {
-  scale: 1.2;
-}
-
-.color {
-  width: 30px;
-  height: 30px;
-  border: 2px solid transparent;
-  cursor: pointer;
-}
-
-.color.selected {
-  scale: 1.2;
+  justify-content: space-between;
+  --pixel-width: 30;
+  --pixel-height: 24;
+  --pixel-size: 12px;
 }
