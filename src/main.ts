@@ -1,6 +1,8 @@
 import './style.css';
 import init_pixel_editor from './pixel_editor';
 import './pixel_editor.css';
+import init_nightsky, { cards } from './nightsky';
+import './nightsky.css';
 import gun_in_a_well from './gun_in_a_well.png';
 import assembler from './assembler.png';
 import deamon from './deamon.png';
@@ -8,6 +10,8 @@ import restoration from './restoration.jpg';
 import godot from './godot.png';
 import rust from './rust.png';
 import bevy from './bevy.svg';
+import star_map from './star-map.png';
+import fluid_sim from './fluid-sim.png';
 // https://feathericons.com as MIT license
 import play_icon from './play.svg';
 import protorunner_video from './protorunner.webm';
@@ -15,7 +19,7 @@ import protorunner from './protorunner.jpg';
 // @ts-ignore
 import jsdos_game from './bundle.jsdos?url';
 
-const afterInit: Array<() => void> = [];
+const afterInit: Array<() => void> = [init_pixel_editor, init_nightsky];
 
 const pill = (img: string, text: string, url: string | null = null) => {
   if (url != null) {
@@ -178,15 +182,19 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </div>
 
     ${desc("Fluid Simulation", "asd", true)}
-    ${showcase("fluid", false, deamon, "Click to run", [pills.rust, pills.bevy], `
-     // TODO
+    ${showcase("fluid", false, fluid_sim, "Click to run", [pills.rust, pills.bevy], `
+      <iframe class="itch_embed top-bottom-border" frameborder="0" src="https://itch.io/embed-upload/13976995?color=141414" allowfullscreen="">
+        <a href="https://naruvan.itch.io/fluid-sim">Play Daemon Resources Department on itch.io</a>
+      </iframe>
     `)}
 
     ${desc("The Nightsky", "asd" + pill(godot, "Read Manual (EN)", "https://drive.google.com/file/d/153kmZe16xE8_qR6NUyYYeHrjAf068j4Y/view?usp=drive_link") + "asd", false)}
     <div class="showcase big right">
-      <div class="container" id="imageContainer">
-        <img src="deb0e130-06d5-43b4-a0de-6501e2f5e468.png" id="starImage" />
-        <svg id="svgOverlay"></svg>
+      <div id="starImageContainer" class="top-bottom-border">
+        <img src=${star_map} id="starImage" />
+        <svg id="starImageSVGOverlay" class="fancy_colors"></svg>
+        ${cards[0]}
+        ${cards[1]}
       </div>
       <div class="pills right">
         ${[pills.physical, pills.gamedesign].join("")}
@@ -200,7 +208,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 // `)}
 
 
-
 // ${desc("Quick! Star Adventure", "asd" + pill(godot, "Read Manual (PL)", "https://docs.google.com/document/d/1PWics277INgrgUChXesr9yj4wXu-0R_LA31JhHfeAOM/edit?usp=sharing") + "asd", false)}
 //     ${showcase("quick", true, deamon, "Click to run", [pills.physical, pills.gamedesign, pills.mobile], `
 //      // TODO
@@ -209,5 +216,3 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 for (const initF of afterInit) {
   initF();
 }
-
-init_pixel_editor();

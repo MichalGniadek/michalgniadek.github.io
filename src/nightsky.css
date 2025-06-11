@@ -1,0 +1,77 @@
+#starImageContainer {
+  position: relative;
+  width: 100%;
+}
+
+#starImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#starImageSVGOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.card {
+  width: 215px;
+  height: 310px;
+  scale: 0.8;
+  perspective: 100000px;
+}
+
+.card1{
+  position: absolute;
+  left: 60%;
+  top: 10%;
+  bottom: 0;
+  right: 0;
+  rotate: 10deg;
+}
+
+.card2{
+  position: absolute;
+  left: 37%;
+  top: 20%;
+  bottom: 0;
+  right: 0;
+  rotate: -10deg;
+}
+
+.card-inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  backface-visibility: hidden;
+  outline: 5px solid #EE4266;
+}
+
+.card-front {
+  z-index: -2;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
