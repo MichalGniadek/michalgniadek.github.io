@@ -135,10 +135,10 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         Michał Gniadek —  Hi!
       </h1>
       I'm a programmer, game developer and a game designer who loves experimenting and jumping into new things.
-      I'm interested in everything games: digital, physical, serious, not serious, games studies and everything in between.
+      I'm interested in everything games: digital, physical, serious, not serious, game studies and everything in between.
     </div>
 
-    ${desc("Gun in a Well", "An action roguelike where the only way to dodge is to shoot. Jump around using recoil, kill enemies with bullets, destroy them with electricity or burn them to crisp. Manage health and ammo, choose your upgrades, break the game and reach the bottom of the well!" + pill(book, "Read GDD", true, "https://docs.google.com/document/d/1QmWzavC7sPQ4W5hAaHghU5D2UPZIBXyFjJylpJIrC14/edit?usp=sharing"))}
+    ${desc("Gun in a Well", "An action roguelike where the only way to dodge is to shoot. Jump around using recoil, kill enemies with bullets, destroy them with electricity or burn them to a crisp. Manage health and ammo, choose your upgrades, break the game and reach the bottom of the well!" + pill(book, "Read GDD", true, "https://docs.google.com/document/d/1QmWzavC7sPQ4W5hAaHghU5D2UPZIBXyFjJylpJIrC14/edit?usp=sharing"))}
     ${showcase("gun_in_a_well", true, gun_in_a_well, "Click to run", [pills.godot, pills.gamedesign, pills.vfx], `
       <iframe class="itch_embed top-bottom-border" frameborder="0" src="https://itch.io/embed-upload/13659283?color=141414" allowfullscreen="">
         <a href="https://naruvan.itch.io/gun-in-a-well">Play Gun in a Well on itch.io</a>
@@ -153,7 +153,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       </div>
     </div>
 
-    ${desc("Assembler Raycasting", "Old school raycasting inspired by classic games, written entrirely in Assembler and running in 16-bit DOS. Use arrow keys to move.", false)}
+    ${desc("Assembler Raycasting", "Old-school raycasting inspired by classic games, written entirely in Assembly and running in 16-bit DOS. Use arrow keys to move.", false)}
     ${showcase("assebler", true, assembler, "Click to run", [pills.assembler], `
       <div id="dos" class="top-bottom-border" tabindex="0"></div>
     `, () => {
@@ -173,7 +173,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       </div>
     `)}
     
-    ${desc("Daemon Resource Department", "A prototype of a strategic roguelike in which you play a corporate demon banisher. Buy spells from in the Windows95 inspired productivity software, visit potion cafeteria and destroy demons!", false)}
+    ${desc("Daemon Resource Department", "A prototype of a strategic roguelike in which you play a corporate demon banisher. Buy spells from the Windows 95 inspired productivity software, visit potion cafeteria and destroy demons!", false)}
     ${showcase("deamon", true, deamon, "Click to run", [pills.godot, pills.gamedesign, pills.vfx], `
       <iframe class="itch_embed top-bottom-border" frameborder="0" src="https://itch.io/embed-upload/13137580?color=141414" allowfullscreen="">
         <a href="https://naruvan.itch.io/daemon-resources-department">Play Daemon Resources Department on itch.io</a>
@@ -187,7 +187,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       </video>
     `)}
     
-    ${desc("Square Marchinator", "A tool for converting pixel art images into high-resolution pictures and trying to convey a more hand-drawn feel. Succesfully used in multiple other games and prototypes.")}
+    ${desc("Square Marchinator", "A tool for converting pixel art images into high-resolution pictures and trying to convey a more hand-drawn feel. Successfully used in multiple other games and prototypes.")}
     <div class="showcase big right">
       <div class="square_marchinator top-bottom-border">
         <div>
