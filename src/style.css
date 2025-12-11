@@ -286,8 +286,9 @@ a.pill, .pill {
 }
 
 .pill > img {
-  width: 1.5em;
-  height: 1.5em;
+  padding-left: 0.2em;
+  width: 1em;
+  height: 1em;
 }
 
 .pill:hover {
