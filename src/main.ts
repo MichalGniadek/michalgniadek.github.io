@@ -8,6 +8,7 @@ import steam from "./steam-logo-black-transparent.png";
 import assembler from "./assembler.png";
 import deamon from "./deamon.png";
 import restoration from "./restoration.jpg";
+import particles_vfx from "./particles-vfx.png";
 import godot from "./godot.png";
 import rust from "./rust.png";
 import bevy from "./bevy.svg";
@@ -338,6 +339,26 @@ const nightskyGame = () => `
     </div>
 `;
 
+const kinectParticles = () => `
+    ${desc(
+      "Visual particle effects",
+      "Particle visuals, reacting to the user in real time. Uses the depth sensor of Xbox 360 kinect and the Bevy game engine.",
+      descSide()
+    )}
+    ${showcase(
+      "particle_effects",
+      showcaseSide(),
+      particles_vfx,
+      "Click to watch",
+      [pills.bevy, pills.vfx],
+      `
+      <div class="showcase big">
+        <iframe class="video_embed top-bottom-border" src="https://www.youtube.com/embed/uB4KGZ2Q1Is?si=2POirVwP5tznX-H4&mute=1&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    `
+    )}
+`;
+
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div class="toplevel ibm-plex-sans">
     <div class="header">
@@ -349,6 +370,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     </div>
 
     ${gunInAWell()}
+    ${kinectParticles()}
     ${assemblerRaycasting()}
     ${nightskyGame()}
     ${fluidSim()}
