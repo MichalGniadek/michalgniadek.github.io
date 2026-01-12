@@ -71,15 +71,20 @@ const pills = {
   // mobile: pill(godot, "Mobile"),
 };
 
+var side = true;
+const descSide = () => {
+  side = !side;
+  return side;
+};
+const showcaseSide = () => {
+  return !side;
+};
+
+const sideToCss = (side: boolean) => (side ? "right" : "left");
+
 const desc = (title: string, body: string, right: boolean = false) => {
-  let r = "";
-  if (right) {
-    r = "right";
-  } else {
-    r = "left";
-  }
   return `
-  <div class="description ${r}">
+  <div class="description ${sideToCss(right)}">
     <h1>
       ${title}
     </h1>
@@ -97,13 +102,6 @@ const showcase = (
   onClick: string,
   onClickInit: () => void = () => {}
 ) => {
-  let r = "";
-  if (right) {
-    r = "right";
-  } else {
-    r = "left";
-  }
-
   const embed_id = id + "_embed";
   const button_id = id + "_button";
 
@@ -122,7 +120,7 @@ const showcase = (
     });
   });
   return `
-     <div class="showcase big ${r}">
+     <div class="showcase big ${sideToCss(right)}">
       <div>
         <button id=${button_id} class="showcase_button">
           <img class="top-bottom-border" src=${img}>
@@ -166,11 +164,12 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
           "Read GDD",
           true,
           "https://docs.google.com/document/d/1QmWzavC7sPQ4W5hAaHghU5D2UPZIBXyFjJylpJIrC14/edit?usp=sharing"
-        )
+        ),
+      descSide()
     )}
     ${showcase(
       "gun_in_a_well",
-      true,
+      showcaseSide(),
       gun_in_a_well,
       "Click to run",
       [pills.godot, pills.gamedesign, pills.vfx],
@@ -184,11 +183,11 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     ${desc(
       "Blob Clock",
       "Real time clock running in real time on GPU using the ray marching method. Use left mouse button to play around with blobs.",
-      true
+      descSide()
     )}
-    <div class="showcase big left">
+    <div class="showcase big ${sideToCss(showcaseSide())}">
       <iframe class="shadertoy_embed top-bottom-border" frameborder="0" src="https://www.shadertoy.com/embed/3fd3zX?gui=false&t=10&paused=false&muted=false" allowfullscreen></iframe>
-      <div class="pills left">
+      <div class="pills ${sideToCss(showcaseSide())}">
         ${[pills.glsl, pills.vfx].join("")}
       </div>
     </div>
@@ -196,11 +195,11 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     ${desc(
       "Assembler Raycasting",
       "Old-school raycasting inspired by classic games, written entirely in Assembly and running in 16-bit DOS. Use arrow keys to move.",
-      false
+      descSide()
     )}
     ${showcase(
       "assebler",
-      true,
+      showcaseSide(),
       assembler,
       "Click to run",
       [pills.assembler],
@@ -221,11 +220,11 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     ${desc(
       "Extremely Ok Painting Restoration Studio",
       "The game took Sixth place in the Polish GameDev GameJam and was created in a team of four people. <p> The player is tasked with restoring classic Polish paintings to their former glory. They must clear the grime from the surface and retouch the image, hopefully not worsening the damage themselves.",
-      true
+      descSide()
     )}
     ${showcase(
       "restoration",
-      false,
+      showcaseSide(),
       restoration,
       "Click to watch",
       [pills.unity, pills.gamedesign],
@@ -239,11 +238,11 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     ${desc(
       "Daemon Resource Department",
       "A prototype of a strategic roguelike in which you play a corporate demon banisher. Buy spells from the Windows 95 inspired productivity software, visit potion cafeteria and destroy demons!",
-      false
+      descSide()
     )}
     ${showcase(
       "deamon",
-      true,
+      showcaseSide(),
       deamon,
       "Click to run",
       [pills.godot, pills.gamedesign, pills.vfx],
@@ -257,11 +256,11 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     ${desc(
       "Protorunner",
       "Short and sweet 3D parkour game. Run, jump, climb and wall run in a minimalist world and get in the flow with satisfying mechanics. Prove your skills in varied challenges and try to finish them as fast as you can. ",
-      true
+      descSide()
     )}
     ${showcase(
       "protorunner",
-      false,
+      showcaseSide(),
       protorunner,
       "Click to watch",
       [pills.unity, pills.gamedesign],
@@ -274,9 +273,10 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     
     ${desc(
       "Square Marchinator",
-      "A tool for converting pixel art images into high-resolution pictures and trying to convey a more hand-drawn feel. Successfully used in multiple other games and prototypes."
+      "A tool for converting pixel art images into high-resolution pictures and trying to convey a more hand-drawn feel. Successfully used in multiple other games and prototypes.",
+      descSide()
     )}
-    <div class="showcase big right">
+    <div class="showcase big ${sideToCss(showcaseSide(Z))}">
       <div class="square_marchinator top-bottom-border">
         <div>
           <div id="grid"></div>
@@ -284,7 +284,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
         </div>
         <canvas id="output"></canvas>
       </div>
-      <div class="pills right">
+      <div class="pills ${sideToCss(showcaseSide(Z))}">
         ${[pills.rust, pills.tool].join("")}
       </div>
     </div>
@@ -292,11 +292,11 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     ${desc(
       "Fluid Simulation",
       "Simulation based on Lattice Boltzmann Method, written in Rust using the Bevy game engine. The fluid flows from left to right, through an obstacle.",
-      true
+      descSide()
     )}
     ${showcase(
       "fluid",
-      false,
+      showcaseSide(),
       fluid_sim,
       "Click to run",
       [pills.rust, pills.bevy],
@@ -316,30 +316,21 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
           true,
           "https://drive.google.com/file/d/153kmZe16xE8_qR6NUyYYeHrjAf068j4Y/view?usp=drive_link"
         ),
-      false
+      descSide()
     )}
-    <div class="showcase big right">
+    <div class="showcase big ${sideToCss(showcaseSide())}">
       <div id="starImageContainer" class="top-bottom-border">
         <img src=${star_map} id="starImage" />
         <svg id="starImageSVGOverlay" class="fancy_colors"></svg>
         ${cards[0]}
         ${cards[1]}
       </div>
-      <div class="pills right">
+      <div class="pills ${sideToCss(showcaseSide())}">
         ${[pills.physical, pills.gamedesign].join("")}
       </div>
     </div>
-    
+
     </div>`;
-
-// ${showcase("stars", true, deamon, "Click to run", [pills.physical, pills.gamedesign], `
-//  // TODO
-// `)}
-
-// ${desc("Quick! Star Adventure", "asd" + pill(godot, "Read Manual (PL)", "https://docs.google.com/document/d/1PWics277INgrgUChXesr9yj4wXu-0R_LA31JhHfeAOM/edit?usp=sharing") + "asd", false)}
-//     ${showcase("quick", true, deamon, "Click to run", [pills.physical, pills.gamedesign, pills.mobile], `
-//      // TODO
-//     `)}
 
 for (const initF of afterInit) {
   initF();
