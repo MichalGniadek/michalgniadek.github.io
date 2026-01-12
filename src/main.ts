@@ -140,16 +140,7 @@ const showcase = (
     `;
 };
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <div class="toplevel ibm-plex-sans">
-    <div class="header">
-      <h1>  
-        Michał Gniadek —  Hi!
-      </h1>
-      I'm a programmer, game developer and a game designer who loves experimenting and jumping into new things.
-      I'm interested in everything games: digital, physical, serious, not serious, game studies and everything in between.
-    </div>
-
+const gunInAWell = () => `
     ${desc(
       "Gun in a Well",
       "An action roguelike where the only way to dodge is to shoot. Jump around using recoil, kill enemies with bullets, destroy them with electricity or burn them to a crisp. Manage health and ammo, choose your upgrades, break the game and reach the bottom of the well!" +
@@ -179,7 +170,9 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       </iframe>
     `
     )}
+`;
 
+const blobClock = () => `
     ${desc(
       "Blob Clock",
       "Real time clock running in real time on GPU using the ray marching method. Use left mouse button to play around with blobs.",
@@ -191,7 +184,9 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
         ${[pills.glsl, pills.vfx].join("")}
       </div>
     </div>
+    `;
 
+const assemblerRaycasting = () => `
     ${desc(
       "Assembler Raycasting",
       "Old-school raycasting inspired by classic games, written entirely in Assembly and running in 16-bit DOS. Use arrow keys to move.",
@@ -216,7 +211,9 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
         });
       }
     )}
+    `;
 
+const paintingStudio = () => `
     ${desc(
       "Extremely Ok Painting Restoration Studio",
       "The game took Sixth place in the Polish GameDev GameJam and was created in a team of four people. <p> The player is tasked with restoring classic Polish paintings to their former glory. They must clear the grime from the surface and retouch the image, hopefully not worsening the damage themselves.",
@@ -234,7 +231,9 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       </div>
     `
     )}
-    
+`;
+
+const daemonDepartment = () => `
     ${desc(
       "Daemon Resource Department",
       "A prototype of a strategic roguelike in which you play a corporate demon banisher. Buy spells from the Windows 95 inspired productivity software, visit potion cafeteria and destroy demons!",
@@ -252,7 +251,9 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       </iframe>
     `
     )}
+`;
 
+const protorunnerGame = () => `
     ${desc(
       "Protorunner",
       "Short and sweet 3D parkour game. Run, jump, climb and wall run in a minimalist world and get in the flow with satisfying mechanics. Prove your skills in varied challenges and try to finish them as fast as you can. ",
@@ -270,13 +271,15 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       </video>
     `
     )}
-    
+`;
+
+const squareMarchinator = () => `
     ${desc(
       "Square Marchinator",
       "A tool for converting pixel art images into high-resolution pictures and trying to convey a more hand-drawn feel. Successfully used in multiple other games and prototypes.",
       descSide()
     )}
-    <div class="showcase big ${sideToCss(showcaseSide(Z))}">
+    <div class="showcase big ${sideToCss(showcaseSide())}">
       <div class="square_marchinator top-bottom-border">
         <div>
           <div id="grid"></div>
@@ -284,11 +287,13 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
         </div>
         <canvas id="output"></canvas>
       </div>
-      <div class="pills ${sideToCss(showcaseSide(Z))}">
+      <div class="pills ${sideToCss(showcaseSide())}">
         ${[pills.rust, pills.tool].join("")}
       </div>
     </div>
+`;
 
+const fluidSim = () => `
     ${desc(
       "Fluid Simulation",
       "Simulation based on Lattice Boltzmann Method, written in Rust using the Bevy game engine. The fluid flows from left to right, through an obstacle.",
@@ -306,7 +311,9 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       </iframe>
     `
     )}
+`;
 
+const nightskyGame = () => `
     ${desc(
       "The Nightsky",
       "A finalist of GenCant 18 Card Flip and Write Challenge. <p> A game where any number of players are tasked with creating a complex constellation out of colourful stars using just a deck of cards, piece of paper and a pen" +
@@ -329,6 +336,27 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
         ${[pills.physical, pills.gamedesign].join("")}
       </div>
     </div>
+`;
+
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
+  <div class="toplevel ibm-plex-sans">
+    <div class="header">
+      <h1>  
+        Michał Gniadek —  Hi!
+      </h1>
+      I'm a programmer, game developer and a game designer who loves experimenting and jumping into new things.
+      I'm interested in everything games: digital, physical, serious, not serious, game studies and everything in between.
+    </div>
+
+    ${gunInAWell()}
+    ${blobClock()}
+    ${assemblerRaycasting()}
+    ${paintingStudio()}
+    ${daemonDepartment()}
+    ${protorunnerGame()}
+    ${squareMarchinator()}
+    ${fluidSim()}
+    ${nightskyGame()}
 
     </div>`;
 
