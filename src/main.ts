@@ -349,14 +349,14 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     </div>
 
     ${gunInAWell()}
-    ${blobClock()}
     ${assemblerRaycasting()}
+    ${nightskyGame()}
+    ${fluidSim()}
+    ${blobClock()}
     ${paintingStudio()}
     ${daemonDepartment()}
     ${protorunnerGame()}
     ${squareMarchinator()}
-    ${fluidSim()}
-    ${nightskyGame()}
 
     </div>`;
 
