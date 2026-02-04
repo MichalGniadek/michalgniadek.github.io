@@ -34,7 +34,7 @@ const pill = (
   img: string,
   text: string,
   invert: boolean = false,
-  url: string | null = null
+  url: string | null = null,
 ) => {
   let invertClass = "";
   if (invert) {
@@ -101,7 +101,7 @@ const showcase = (
   text: string,
   pills: string[],
   onClick: string,
-  onClickInit: () => void = () => {}
+  onClickInit: () => void = () => {},
 ) => {
   const embed_id = id + "_embed";
   const button_id = id + "_button";
@@ -149,15 +149,15 @@ const gunInAWell = () => `
           steam,
           "Steam",
           true,
-          "https://store.steampowered.com/app/3509950/Gun_in_a_Well"
+          "https://store.steampowered.com/app/3509950/Gun_in_a_Well",
         ) +
         pill(
           book,
           "Read GDD",
           true,
-          "https://docs.google.com/document/d/1QmWzavC7sPQ4W5hAaHghU5D2UPZIBXyFjJylpJIrC14/edit?usp=sharing"
+          "https://docs.google.com/document/d/1QmWzavC7sPQ4W5hAaHghU5D2UPZIBXyFjJylpJIrC14/edit?usp=sharing",
         ),
-      descSide()
+      descSide(),
     )}
     ${showcase(
       "gun_in_a_well",
@@ -169,7 +169,7 @@ const gunInAWell = () => `
       <iframe class="itch_embed top-bottom-border" frameborder="0" src="https://itch.io/embed-upload/13659283?color=141414" allowfullscreen="">
         <a href="https://naruvan.itch.io/gun-in-a-well">Play Gun in a Well on itch.io</a>
       </iframe>
-    `
+    `,
     )}
 `;
 
@@ -177,7 +177,7 @@ const blobClock = () => `
     ${desc(
       "Blob Clock",
       "Real time clock running in real time on GPU using the ray marching method. Use left mouse button to play around with blobs.",
-      descSide()
+      descSide(),
     )}
     <div class="showcase big ${sideToCss(showcaseSide())}">
       <iframe class="shadertoy_embed top-bottom-border" frameborder="0" src="https://www.shadertoy.com/embed/3fd3zX?gui=false&t=10&paused=false&muted=false" allowfullscreen></iframe>
@@ -191,7 +191,7 @@ const assemblerRaycasting = () => `
     ${desc(
       "Assembler Raycasting",
       "Old-school raycasting inspired by classic games, written entirely in Assembly and running in 16-bit DOS. Use arrow keys to move.",
-      descSide()
+      descSide(),
     )}
     ${showcase(
       "assebler",
@@ -210,7 +210,7 @@ const assemblerRaycasting = () => `
           kiosk: true,
           noCloud: true,
         });
-      }
+      },
     )}
     `;
 
@@ -218,7 +218,7 @@ const paintingStudio = () => `
     ${desc(
       "Extremely Ok Painting Restoration Studio",
       "The game took Sixth place in the Polish GameDev GameJam and was created in a team of four people. <p> The player is tasked with restoring classic Polish paintings to their former glory. They must clear the grime from the surface and retouch the image, hopefully not worsening the damage themselves.",
-      descSide()
+      descSide(),
     )}
     ${showcase(
       "restoration",
@@ -230,7 +230,7 @@ const paintingStudio = () => `
       <div class="showcase big">
         <iframe class="video_embed top-bottom-border" src="https://www.youtube.com/embed/5fttXWCcJEc?si=512SX2hHcefYK568&start=92&mute=1&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
-    `
+    `,
     )}
 `;
 
@@ -238,7 +238,7 @@ const daemonDepartment = () => `
     ${desc(
       "Daemon Resource Department",
       "A prototype of a strategic roguelike in which you play a corporate demon banisher. Buy spells from the Windows 95 inspired productivity software, visit potion cafeteria and destroy demons!",
-      descSide()
+      descSide(),
     )}
     ${showcase(
       "deamon",
@@ -250,7 +250,7 @@ const daemonDepartment = () => `
       <iframe class="itch_embed top-bottom-border" frameborder="0" src="https://itch.io/embed-upload/13137580?color=141414" allowfullscreen="">
         <a href="https://naruvan.itch.io/daemon-resources-department">Play Daemon Resources Department on itch.io</a>
       </iframe>
-    `
+    `,
     )}
 `;
 
@@ -258,7 +258,7 @@ const protorunnerGame = () => `
     ${desc(
       "Protorunner",
       "Short and sweet 3D parkour game. Run, jump, climb and wall run in a minimalist world and get in the flow with satisfying mechanics. Prove your skills in varied challenges and try to finish them as fast as you can. ",
-      descSide()
+      descSide(),
     )}
     ${showcase(
       "protorunner",
@@ -270,7 +270,7 @@ const protorunnerGame = () => `
       <video class="video_embed top-bottom-border" controls autoplay muted>
         <source src=${protorunner_video}>
       </video>
-    `
+    `,
     )}
 `;
 
@@ -278,7 +278,7 @@ const squareMarchinator = () => `
     ${desc(
       "Square Marchinator",
       "A tool for converting pixel art images into high-resolution pictures and trying to convey a more hand-drawn feel. Successfully used in multiple other games and prototypes.",
-      descSide()
+      descSide(),
     )}
     <div class="showcase big ${sideToCss(showcaseSide())}">
       <div class="square_marchinator top-bottom-border">
@@ -298,7 +298,7 @@ const fluidSim = () => `
     ${desc(
       "Fluid Simulation",
       "Simulation based on Lattice Boltzmann Method, written in Rust using the Bevy game engine. The fluid flows from left to right, through an obstacle.",
-      descSide()
+      descSide(),
     )}
     ${showcase(
       "fluid",
@@ -310,7 +310,7 @@ const fluidSim = () => `
       <iframe class="itch_embed top-bottom-border" frameborder="0" src="https://itch.io/embed-upload/13976995?color=141414" allowfullscreen="">
         <a href="https://naruvan.itch.io/fluid-sim">Play Daemon Resources Department on itch.io</a>
       </iframe>
-    `
+    `,
     )}
 `;
 
@@ -322,9 +322,9 @@ const nightskyGame = () => `
           book,
           "Read Manual",
           true,
-          "https://drive.google.com/file/d/153kmZe16xE8_qR6NUyYYeHrjAf068j4Y/view?usp=drive_link"
+          "https://drive.google.com/file/d/153kmZe16xE8_qR6NUyYYeHrjAf068j4Y/view?usp=drive_link",
         ),
-      descSide()
+      descSide(),
     )}
     <div class="showcase big ${sideToCss(showcaseSide())}">
       <div id="starImageContainer" class="top-bottom-border">
@@ -343,7 +343,7 @@ const kinectParticles = () => `
     ${desc(
       "Visual particle effects",
       "Particle visuals, reacting to the user in real time. Uses the depth sensor of Xbox 360 kinect and the Bevy game engine.",
-      descSide()
+      descSide(),
     )}
     ${showcase(
       "particle_effects",
@@ -355,7 +355,7 @@ const kinectParticles = () => `
       <div class="showcase big">
         <iframe class="video_embed top-bottom-border" src="https://www.youtube.com/embed/uB4KGZ2Q1Is?si=2POirVwP5tznX-H4&mute=1&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
-    `
+    `,
     )}
 `;
 
@@ -370,15 +370,15 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     </div>
 
     ${gunInAWell()}
-    ${kinectParticles()}
-    ${assemblerRaycasting()}
-    ${nightskyGame()}
-    ${fluidSim()}
-    ${blobClock()}
     ${paintingStudio()}
-    ${daemonDepartment()}
+    ${blobClock()}
     ${protorunnerGame()}
+    ${daemonDepartment()}
+    ${assemblerRaycasting()}
+    ${fluidSim()}
+    ${kinectParticles()}
     ${squareMarchinator()}
+    ${nightskyGame()}
 
     </div>`;
 
