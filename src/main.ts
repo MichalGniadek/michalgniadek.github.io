@@ -179,6 +179,7 @@ const gunInAWell = () => `
 )}
 `;
 
+//@ts-ignore (unused)
 const blobClock = () => `
     ${desc(
   "Blob Clock",
