@@ -394,21 +394,19 @@ const quick = () => `
   "A quick real-time cooperative game about escaping a black hole!" +
   "<p>Half of the players are the Pilots. They must traverse and manipulate spacetime to reach safety." +
   " They can use their Ship Computer (a mobile app) to get their bearings and deal with challenges. Meanwhile, the Engineers are working tirelessly to fix the equipment and the Ship Computer whenever they break." +
-  "<p> Created in a two-person team.",
+  "<p> Created in a two-person team." + pill(
+    book,
+    "Read Manual (PL)",
+    true,
+    "https://docs.google.com/document/d/1PWics277INgrgUChXesr9yj4wXu-0R_LA31JhHfeAOM/edit?usp=drive_web&ouid=113326616910235884393",
+  ),
   descSide())}
   ${showcase(
     "quick",
     showcaseSide(),
     quick_png,
     "",
-    [
-      pill(
-        book,
-        "Read Manual (PL)",
-        true,
-        "https://docs.google.com/document/d/1PWics277INgrgUChXesr9yj4wXu-0R_LA31JhHfeAOM/edit?usp=drive_web&ouid=113326616910235884393",
-      ),
-      pills.gamedesign, pills.physical],
+    [pills.gamedesign, pills.physical],
     "",
     () => { })}
   `;
