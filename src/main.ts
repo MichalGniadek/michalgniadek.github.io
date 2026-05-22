@@ -423,14 +423,14 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     </div>
 
     ${gunInAWell()}
+    ${daemonDepartment()}
     ${fissured_grotto()}
+    ${paintingStudio()}
+    ${protorunnerGame()}
+    ${fluidSim()}
+    ${assemblerRaycasting()}
     ${quick()}
     ${nightskyGame()}
-    ${paintingStudio()}
-    ${daemonDepartment()}
-    ${protorunnerGame()}
-    ${assemblerRaycasting()}
-    ${fluidSim()}
     ${squareMarchinator()}
 
     </div>`;
