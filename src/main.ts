@@ -346,6 +346,7 @@ const nightskyGame = () => `
     </div>
 `;
 
+//@ts-ignore (unused)
 const kinectParticles = () => `
     ${desc(
   "Visual particle effects",
