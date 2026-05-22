@@ -430,7 +430,6 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     ${protorunnerGame()}
     ${assemblerRaycasting()}
     ${fluidSim()}
-    ${kinectParticles()}
     ${squareMarchinator()}
 
     </div>`;
